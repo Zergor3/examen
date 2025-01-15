@@ -1,0 +1,51 @@
+<div class="pedido-form-container">
+  <h2>Crear Pedido</h2>
+
+  <form [formGroup]="pedidoForm" (ngSubmit)="submitPedido()">
+    <!-- Selección de cliente -->
+    <div>
+      <label for="cliente">Cliente</label>
+      <select id="cliente" formControlName="cliente">
+        <option *ngFor="let cliente of clientes" [value]="cliente.id">
+          {{ cliente.nombre }}
+        </option>
+      </select>
+    </div>
+
+    <!-- Líneas de pedido -->
+    <div formArrayName="lineasDePedido">
+      <div
+        *ngFor="let linea of lineasDePedido.controls; let i = index"
+        [formGroupName]="i"
+        class="linea-pedido"
+      >
+        <label for="producto-{{ i }}">Producto</label>
+        <select id="producto-{{ i }}" formControlName="producto">
+          <option *ngFor="let producto of productos" [ngValue]="producto">
+            {{ producto.nombre }}
+          </option>
+        </select>
+
+        <label for="cantidad-{{ i }}">Cantidad</label>
+        <input
+          id="cantidad-{{ i }}"
+          formControlName="cantidad"
+          type="number"
+          min="1"
+        />
+
+        <button type="button" (click)="removeLineaDePedido(i)">Eliminar</button>
+      </div>
+    </div>
+
+    <button type="button" (click)="addLineaDePedido()">
+      Agregar Línea de Pedido
+    </button>
+
+    <div>
+      <h3>Total: {{ calculateTotal() | currency }}</h3>
+    </div>
+
+    <button type="submit" [disabled]="!pedidoForm.valid">Crear Pedido</button>
+  </form>
+</div>

@@ -1,0 +1,25 @@
+<h2>Lista de Pedidos</h2>
+<a routerLink="/nuevo-pedido" class="btn">Crear Nuevo Pedido</a>
+
+<table>
+  <thead>
+    <tr>
+      <th>ID</th>
+      <th>Cliente</th>
+      <th>Total</th>
+      <th>Acciones</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let pedido of pedidos">
+      <td>{{ pedido.id }}</td>
+      <td>{{ pedido.cliente.nombre }}</td>
+      <td>{{ pedido.total | currency }}</td>
+      <td>
+        <a routerLink="/pedidos/{{ pedido.id }}">Ver</a> |
+        <a routerLink="/editar-pedido/{{ pedido.id }}">Editar</a> |
+        <button (click)="deletePedido(pedido.id)">Eliminar</button>
+      </td>
+    </tr>
+  </tbody>
+</table>

@@ -1,0 +1,43 @@
+<div *ngIf="pedido$ | async as pedido; else loading">
+  <h2>Detalle del Pedido</h2>
+  <div class="cliente">
+    <h3>Cliente:</h3>
+    <p><strong>Nombre:</strong> {{ pedido.cliente.nombre }}</p>
+    <p><strong>Dirección:</strong> {{ pedido.cliente.direccion }}</p>
+  </div>
+
+  <div class="lineas">
+    <h3>Líneas de Pedido</h3>
+    <table>
+      <thead>
+        <tr>
+          <th>Producto</th>
+          <th>Cantidad</th>
+          <th>Precio</th>
+          <th>Total</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let linea of pedido.lineas">
+          <td>{{ linea.producto.nombre }}</td>
+          <td>{{ linea.cantidad }}</td>
+          <td>${{ linea.producto.precio | number : "1.2-2" }}</td>
+          <td>
+            ${{ linea.producto.precio * linea.cantidad | number : "1.2-2" }}
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="total">
+    <h3>Total:</h3>
+    <p>
+      <strong>${{ pedido.total | number : "1.2-2" }}</strong>
+    </p>
+  </div>
+</div>
+
+<ng-template #loading>
+  <p>Cargando detalles del pedido...</p>
+</ng-template>

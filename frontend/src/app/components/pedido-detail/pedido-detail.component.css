@@ -1,0 +1,38 @@
+h2 {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.cliente,
+.lineas,
+.total {
+  margin-bottom: 30px;
+}
+
+.cliente p,
+.total p {
+  font-size: 16px;
+  margin: 5px 0;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+th,
+td {
+  padding: 8px;
+  text-align: left;
+  border-bottom: 1px solid #ddd;
+}
+
+th {
+  background-color: #f4f4f4;
+}
+
+.total {
+  font-size: 18px;
+  font-weight: bold;
+  text-align: right;
+}
